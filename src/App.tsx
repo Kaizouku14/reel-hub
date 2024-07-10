@@ -1,10 +1,11 @@
-import './App.css'
-
+import { Header, Main, Footer } from './layout'
 function App() {
 
   return (
     <>
-    
+      <Header/>
+      <Main/>
+      <Footer/>
     </>
   )
 }
