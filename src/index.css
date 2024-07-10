@@ -7,14 +7,18 @@
 
 @layer base {
 
-    *{
-       @apply m-0 p-0;
-       @apply box-border;
-       @apply font-poppins;
-    }
+  *{
+     @apply m-0 p-0;
 
-    html,
-    body {
-        @apply bg-slate-900;
-    }
+     @apply box-border;
+
+     @apply font-poppins;
+  }
+
+  html,
+  body {
+
+    @apply bg-slate-950;
+    
+  }
 }
