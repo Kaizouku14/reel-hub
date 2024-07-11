@@ -15,6 +15,7 @@ export const SearchResultModal:FC<SearchResult> = ({ isOnFocus , searchResult}) 
           Jurassic Park {searchResult}
         <X className="hover:text-slate-500 cursor-pointer" size={20} />
         </div>
+        
     </div>
   )
 }
