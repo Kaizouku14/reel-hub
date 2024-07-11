@@ -10,24 +10,23 @@ const Main = () => {
     { id: 6, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
     { id: 7, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
     { id: 8, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
-    { id: 6, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
-    { id: 7, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
-    { id: 8, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
-    { id: 6, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
-    { id: 7, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
-    { id: 8, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
-    { id: 6, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
-    { id: 7, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
-    { id: 8, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
-    { id: 6, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
-    { id: 7, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
-    { id: 8, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
+    { id: 9, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
+    { id: 10, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
+    { id: 11, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
+    { id: 12, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
+    { id: 13, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
+    { id: 14, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
+    { id: 15, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
+    { id: 16, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
+    { id: 17, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
+    { id: 18, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
+    { id: 19, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
+    { id: 20, title: 'Hit Man', imgSrc: 'movi-poster.jpg' },
   ];
 
 
   return (
     <main className="h-[585px] flex flex-col p-3 gap-y-2">
-
         <section className="p-4 h-76 flex flex-col gap-y-3 text-white ">
            <span className="text-lg max-md:text-base font-bold">Continue Watching</span>
 
@@ -44,13 +43,12 @@ const Main = () => {
                     </div>
                   ))}
               </div>
-               <ScrollBar className="hidden max-md:block"
-                 orientation="horizontal"  />
+               <ScrollBar
+                 className="hidden max-md:block"
+                 orientation="horizontal"
+                />
             </ScrollArea>
-
         </section>
-
-
     </main>
   )
 }
