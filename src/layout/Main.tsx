@@ -41,8 +41,6 @@ const Main = () => {
            <MovieLists movieList={upComingMovies} />
         </section>
     </main>
-
-    
   )
 }
 
