@@ -3,7 +3,6 @@ import { CirclePlay , Clapperboard } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "./ui/dialog";
@@ -44,7 +43,7 @@ export const MovieDescriptionDialog: FC<DialogProps> = ({ open, onClose, movie }
           <DialogTitle className="text-white font-bold text-2xl px-2 max-sm:text-[0.90rem]">
             {movieDetails?.original_title}
           </DialogTitle>
-          <DialogDescription className="flex flex-col pt-4 gap-y-5 text-white max-md:text-center">
+          <div className="flex flex-col pt-4 gap-y-5 text-white max-md:text-center">
             <div className="flex text-md font-semibold max-md:justify-center">
               <span>{movieDetails?.release_date}</span>
               <span className="mx-3">|</span>
@@ -76,7 +75,7 @@ export const MovieDescriptionDialog: FC<DialogProps> = ({ open, onClose, movie }
                 <span>Watch Movie</span>
               </button>
             </div>
-          </DialogDescription>
+          </div>
         </DialogHeader>
       </DialogContent>
     </Dialog>
