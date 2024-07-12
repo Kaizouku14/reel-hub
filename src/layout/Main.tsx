@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { queryPopularMovies, queryNowPlayingMovies , queryUpComingMovies } from "../service/api-service";
 import MovieLists from "../components/MovieLists";
-import { MoviePoster } from "../interface/Movie";
+import { MovieInfo } from "../interface/Movie";
 
 const Main = () => {
-  const [popularMovies, setPopularMovies] = useState<MoviePoster[]>([]);
-  const [nowPlayingMovies, setNowPlayingMovies] = useState<MoviePoster[]>([]);
-  const [upComingMovies, setUpComingMovies] = useState<MoviePoster[]>([]);
+  const [popularMovies, setPopularMovies] = useState<MovieInfo[]>([]);
+  const [nowPlayingMovies, setNowPlayingMovies] = useState<MovieInfo[]>([]);
+  const [upComingMovies, setUpComingMovies] = useState<MovieInfo[]>([]);
 
   useEffect(() => {
    
@@ -41,6 +41,8 @@ const Main = () => {
            <MovieLists movieList={upComingMovies} />
         </section>
     </main>
+
+    
   )
 }
 
