@@ -6,17 +6,18 @@ import {
   DialogHeader,
   DialogTitle,
 } from "./ui/dialog";
-import { MovieInfo } from "../interface/Movie";
+import { MovieDetails } from "../interface/MovieDetails";
 import { getGenreNames } from "../utils/helper";
+import { Description } from "@radix-ui/react-dialog";
 
 interface DialogProps {
   open: boolean;
   onClose: () => void;
-  movie?: MovieInfo;
+  movie?: MovieDetails;
 }
 
 export const MovieDescriptionDialog: FC<DialogProps> = ({ open, onClose, movie }) => {
-  const [movieDetails, setMovieDetails] = useState<MovieInfo | null>(null);
+  const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
 
   useEffect(() => {
     if (movie) {
@@ -44,13 +45,13 @@ export const MovieDescriptionDialog: FC<DialogProps> = ({ open, onClose, movie }
             {movieDetails?.original_title}
           </DialogTitle>
           <div className="flex flex-col pt-4 gap-y-5 text-white max-md:text-center">
-            <div className="flex text-md font-semibold max-md:justify-center">
-              <span>{movieDetails?.release_date}</span>
-              <span className="mx-3">|</span>
-              <span>{movieDetails?.vote_average.toFixed(1)}</span>
-              <span className="mx-3">|</span>
-              <span>{movieDetails?.original_language}</span>
-            </div>
+            <ul className="flex text-md font-semibold max-md:justify-center list-none p-0 m-0">
+              <li>{movieDetails?.release_date}</li>
+              <li className="mx-3">|</li>
+              <li>{movieDetails?.vote_average.toFixed(1)}</li>
+              <li className="mx-3">|</li>
+              <li>{movieDetails?.original_language}</li>
+            </ul>
             <div className="flex flex-col gap-y-2">
               <span className="text-slate-300 font-bold text-md">GENRES</span>
               <div className="flex flex-wrap gap-2 max-md:justify-center">
@@ -61,10 +62,10 @@ export const MovieDescriptionDialog: FC<DialogProps> = ({ open, onClose, movie }
                 ))}
               </div>
             </div>
-            <div className="h-[180px] max-h-56 overflow-auto"> 
-              <span className="text-slate-300 font-bold text-md">SUMMARY</span>
+            <Description className="h-[180px] max-h-56 overflow-auto"> 
+              <div className="text-slate-300 font-bold text-md">SUMMARY</div>
               <div className="text-white text-[0.80rem]">{movieDetails?.overview}</div>
-            </div>
+            </Description>
             <div className="flex justify-end gap-x-3">
               <button className="w-[150px] text-[0.90rem] text-white bg-slate-800 py-2 px-4 rounded-full flex items-center justify-between hover:bg-slate-900 active:bg-slate-950 transition-all">
                 <Clapperboard size={20} />

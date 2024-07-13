@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { queryPopularMovies, queryNowPlayingMovies , queryUpComingMovies } from "../service/api-service";
 import MovieLists from "../components/MovieLists";
-import { MovieInfo } from "../interface/Movie";
-
+import { MovieDetails } from "../interface/MovieDetails";
 const Main = () => {
-  const [popularMovies, setPopularMovies] = useState<MovieInfo[]>([]);
-  const [nowPlayingMovies, setNowPlayingMovies] = useState<MovieInfo[]>([]);
-  const [upComingMovies, setUpComingMovies] = useState<MovieInfo[]>([]);
+  const [popularMovies, setPopularMovies] = useState<MovieDetails[]>([]);
+  const [nowPlayingMovies, setNowPlayingMovies] = useState<MovieDetails[]>([]);
+  const [upComingMovies, setUpComingMovies] = useState<MovieDetails[]>([]);
 
   useEffect(() => {
    
