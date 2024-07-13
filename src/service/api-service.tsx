@@ -32,3 +32,14 @@ export const queryUpComingMovies = async () => {
         return [];
     }
 };
+
+export const querySearchedMovie = async (querySearch : string) => {
+    try {
+        const response = await axios.get(`https://api.themoviedb.org/3/search/movie?query=${querySearch}&api_key=${import.meta.env.VITE_API_KEY}`);
+
+        return response.data.results;
+    } catch (error) {
+        console.error('Error fetching popular movies:', error);
+        return [];
+    }
+}

@@ -1,17 +1,17 @@
 import { FC, useState } from "react";
 import {  ScrollArea , ScrollBar   } from "../components/ui/scroll-area";
-import { MovieInfo } from "../interface/Movie";
 import { MovieDescriptionDialog } from "./MovieDescriptionDialog";
+import { MovieDetails } from "../interface/MovieDetails";
 
 interface MovieProps {
-  movieList : MovieInfo[]; 
+  movieList : MovieDetails[]; 
 }
 
 export const MovieLists:FC<MovieProps> = ({ movieList }) => {
   const [isDialogOpen, setDialogOpen] = useState(false);
-  const [selectedMovie, setSelectedMovie] = useState<MovieInfo | null>(null);
+  const [selectedMovie, setSelectedMovie] = useState<MovieDetails | null>(null);
 
-  const handleClickedMovie = (movie: MovieInfo) => {
+  const handleClickedMovie = (movie: MovieDetails) => {
     setSelectedMovie(movie);
     setDialogOpen(true);
   };
