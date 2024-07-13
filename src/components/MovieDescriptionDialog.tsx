@@ -63,8 +63,8 @@ export const MovieDescriptionDialog: FC<DialogProps> = ({ open, onClose, movie }
               </div>
             </div>
             <Description className="h-[180px] max-h-56 overflow-auto"> 
-              <div className="text-slate-300 font-bold text-md">SUMMARY</div>
-              <div className="text-white text-[0.80rem]">{movieDetails?.overview}</div>
+              <span className="text-slate-300 font-bold text-md">SUMMARY</span>
+              <span className="text-white text-[0.80rem]">{movieDetails?.overview}</span>
             </Description>
             <div className="flex justify-end gap-x-3">
               <button className="w-[150px] text-[0.90rem] text-white bg-slate-800 py-2 px-4 rounded-full flex items-center justify-between hover:bg-slate-900 active:bg-slate-950 transition-all">

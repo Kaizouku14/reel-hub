@@ -3,6 +3,8 @@ import { ChangeEvent, FC, useEffect, useState } from "react";
 import { querySearchedMovie } from "../service/api-service";
 import { MovieDetails } from "../interface/MovieDetails";
 import { MovieDescriptionDialog } from "./MovieDescriptionDialog";
+import { MovieCard } from "./MovieCard";
+
 
 interface SearchProps {
     onClose : () => void;
@@ -12,6 +14,10 @@ export const SearchResultModal:FC<SearchProps> = ({ onClose }) => {
   const [searchValue, setSearchValue] = useState<string>(''); 
   const [searchResult, setSearchResult] = useState<MovieDetails[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<MovieDetails | null>(null);
+  const [history, setHistory] = useState<MovieDetails[]>(() => {
+    const storedHistory = localStorage.getItem('history');
+    return storedHistory ? JSON.parse(storedHistory) : [];
+  });
   const [isDialogOpen, setDialogOpen] = useState(false);
   
   useEffect (() => {
@@ -47,6 +53,11 @@ export const SearchResultModal:FC<SearchProps> = ({ onClose }) => {
   const handleClickMovie = (movie : MovieDetails) => {
       setSelectedMovie(movie);
       setDialogOpen(true);
+
+      if (!history.some((item) => item.id === movie.id)) {
+        setHistory(prevHistory => [...prevHistory, movie]);
+        localStorage.setItem('history', JSON.stringify([...history, movie]));
+      }
   }
 
   const handleCloseDialog = () => {
@@ -54,6 +65,10 @@ export const SearchResultModal:FC<SearchProps> = ({ onClose }) => {
     setSelectedMovie(null);
   };
  
+  const clearHistory = () => {
+    setHistory([]);
+    localStorage.removeItem('history');
+  };
 
   return (
     <>
@@ -77,33 +92,33 @@ export const SearchResultModal:FC<SearchProps> = ({ onClose }) => {
               </button>
           </div> 
 
-          <div className="h-80 grid grid-cols-4 overflow-y-auto p-4 gap-4 max-md:h-full max-md:grid-cols-1 max-md:gap-4">
-            {searchResult.length > 0 && (
+          <div className={`h-80 grid overflow-y-auto py-4 px-2 gap-4 max-md:h-full max-md:grid-cols-1 max-md:gap-4
+          ${searchResult.length > 0 ? 'grid-cols-4' : '' }`}>
+            {searchResult.length > 0 ? (
                 searchResult.map((movie, index) => (
-                  <div
-                    key={index}
-                    className="w-36 max-md:border-b max-md:border-gray-400 max-md:w-full max-md:inline-block max-md:py-4"
-                    onClick={() => handleClickMovie(movie)}
-                  >
-                    <div className="flex flex-col max-md:flex-row">
-                      <img
-                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                        alt="Movie Poster"
-                        className="cursor-pointer rounded-xl hover:border-2 h-48 w-36 object-cover max-md:h-24 max-md:w-24"
-                      />
-                      <span className="text-[0.75rem] text-white mt-2 text-center max-md:text-base max-md:ml-4">
-                        {movie.original_title}
-                        <span className="hidden max-md:block text-gray-500 text-sm text-start">
-                         {movie.release_date}
-                        </span>
-                      </span>
-                     
-                    </div>
-                  </div>
+                  <MovieCard key={index} clickCard={() => handleClickMovie(movie)} data={movie} />
                 ))
+              ) : (
+                <div className="flex flex-col h-full w-full">
+                   <div className="flex justify-between ">
+                      <p className="max-md:text-[0.66rem] text-gray-400">Recently Searched</p>
+                      <button className="hover:underline text-[0.80rem] text-blue-600 max-md:text-[0.65rem]"
+                       onClick={clearHistory}
+                      >Clear history</button>
+                   </div>
+                   <div className={`h-64 flex gap-4 items-center ${history.length > 0 ? '' : 'justify-center'}
+                   max-md:flex-col`}>         
+                    {history.length > 0 ? (
+                      history.map((movie, index) => (
+                        <MovieCard key={index} clickCard={() => handleClickMovie(movie)} data={movie}/>
+                      ))
+                    ): (
+                      <p>No Recent History</p>
+                    )}
+                   </div>
+                </div>
               )}
           </div>
-
           </div>
       </div>
 
