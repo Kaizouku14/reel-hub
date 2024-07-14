@@ -3,11 +3,8 @@ import {  ScrollArea , ScrollBar   } from "../components/ui/scroll-area";
 import { MovieDescriptionDialog } from "./MovieDescriptionDialog";
 import { MovieDetails } from "../interface/MovieDetails";
 
-interface MovieProps {
-  movieList : MovieDetails[]; 
-}
 
-export const MovieLists:FC<MovieProps> = ({ movieList }) => {
+export const MovieLists:FC<{ movieList : MovieDetails[]; }> = ({ movieList }) => {
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState<MovieDetails | null>(null);
 

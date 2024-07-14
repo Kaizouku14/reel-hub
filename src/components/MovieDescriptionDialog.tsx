@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { CirclePlay , Clapperboard } from 'lucide-react';
+import { Clapperboard } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -11,6 +11,7 @@ import { getGenreNames } from "../utils/helper";
 import { Description } from "@radix-ui/react-dialog";
 import { fetchMovieVideo } from "../service/api-service";
 import { MovieTrailerPlayer } from "./MovieTrailerPlayer";
+
 
 interface DialogProps {
   open: boolean;
@@ -47,8 +48,7 @@ export const MovieDescriptionDialog: FC<DialogProps> = ({ open, onClose, movie }
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent
-        className='h-[450px] bg-cover bg-center border-none bg-blend-darken max-md:w-[350px] rounded transition-width duration-300 ease-in-out
-            max-md:h-[480px]'
+        className='h-[450px] bg-cover bg-center border-none bg-blend-darken max-md:w-[350px] rounded'
         style={{
           backgroundImage: backgroundImage ? backgroundImage : 'black',
           backgroundColor: backgroundImage ? 'rgba(2, 6, 23, 0.4)' : 'transparent',
@@ -77,11 +77,11 @@ export const MovieDescriptionDialog: FC<DialogProps> = ({ open, onClose, movie }
               </div>
             </div>
             <Description className="h-[180px] max-h-56 overflow-auto"> 
-              <span className="text-slate-300 font-bold text-md">SUMMARY</span>
+              <span className="text-slate-300 font-bold text-md">SUMMARY</span><br/>
               <span className="text-white text-[0.80rem]">{movieDetails?.overview}</span>
             </Description>
-            <div className="flex justify-end gap-x-3 ">
-              <button className="w-[150px] text-[0.90rem] text-white bg-slate-800 py-2 px-4 rounded-full flex items-center justify-between hover:bg-slate-900 active:bg-slate-950 transition-all"
+            <div className="flex justify-end max-md:justify-center">
+              <button className="w-[150px] text-[0.90rem] text-white bg-slate-800 py-2 px-4 rounded-full  flex items-center justify-between hover:bg-slate-900 active:bg-slate-950 transition-all"
                onClick={handleTrailerButton}
                >
                 <Clapperboard size={20} />
@@ -90,10 +90,6 @@ export const MovieDescriptionDialog: FC<DialogProps> = ({ open, onClose, movie }
               {openVideo && trailerURL && (
                 <MovieTrailerPlayer trailerUrl={trailerURL}/>
                )}
-              <button className="w-[150px] text-[0.90rem] text-white bg-slate-800 py-2 px-4 rounded-full flex items-center justify-between hover:bg-slate-900 active:bg-slate-950 transition-all">
-                <CirclePlay size={22} />
-                <span>Watch Movie</span>
-              </button>
             </div>
           </div>
         </DialogHeader>

@@ -77,3 +77,19 @@ export const fetchMovieVideo = async (movie_id : number | undefined):Promise<str
         console.error('Error fetching movie details:', error);
       }
 }
+
+export const fetchMovieProviders = async (movie_id : number | undefined) => {
+    try{
+        if(!movie_id) return;
+
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/watch/providers?api_key=${import.meta.env.VITE_API_KEY}`)
+
+        const { AE } = response.data.results;
+
+        console.log(response.data.results)
+        console.log(AE)
+
+    }catch(error){
+        console.error('Error fetching movie providers:', error);
+    }
+}
