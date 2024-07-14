@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { queryPopularMovies, queryNowPlayingMovies , queryUpComingMovies } from "../service/api-service";
+import { fetchPopularMovies, fetchNowPlayingMovies , fetchUpComingMovies } from "../service/api-service";
 import MovieLists from "../components/MovieLists";
 import { MovieDetails } from "../interface/MovieDetails";
 
@@ -11,15 +11,15 @@ const Main = () => {
 
   useEffect(() => {
    
-    queryPopularMovies()
+    fetchPopularMovies()
        .then(res => setPopularMovies(res))
        .catch(error => console.log(error))
 
-    queryNowPlayingMovies()
+    fetchNowPlayingMovies()
         .then(res => setNowPlayingMovies(res))
         .catch(error => console.log(error))
 
-    queryUpComingMovies()
+    fetchUpComingMovies()
        .then(res => setUpComingMovies(res))
        .catch(error => console.log(error))
 

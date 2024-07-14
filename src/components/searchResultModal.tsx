@@ -1,6 +1,6 @@
 import { Search , X} from "lucide-react";
 import { ChangeEvent, FC, useEffect, useState } from "react";
-import { querySearchedMovie } from "../service/api-service";
+import { fetchSearchedMovie } from "../service/api-service";
 import { MovieDetails } from "../interface/MovieDetails";
 import { MovieDescriptionDialog } from "./MovieDescriptionDialog";
 import { MovieCard } from "./MovieCard";
@@ -39,7 +39,7 @@ export const SearchResultModal:FC<SearchProps> = ({ onClose }) => {
      if(querySearch){
       setSearchValue(querySearch);
 
-      await querySearchedMovie(searchValue)
+      await fetchSearchedMovie(searchValue)
         .then((res) => setSearchResult(res))
         .catch((err) => {
           console.error(err);

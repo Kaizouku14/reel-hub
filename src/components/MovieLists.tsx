@@ -24,7 +24,7 @@ export const MovieLists:FC<MovieProps> = ({ movieList }) => {
   return (
     <>
       <ScrollArea className="flex w-full space-x-2 whitespace-nowrap">
-              <div className="flex w-max space-x-4 p-4">
+             <div className="flex w-max space-x-4 p-4">
                   {movieList.length > 0 && (
                     movieList.map((movie, index) => (
                       <div key={index} className="flex flex-col items-center rounded-xl w-36 mx-1"

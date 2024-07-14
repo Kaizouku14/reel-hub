@@ -9,6 +9,8 @@ import {
 import { MovieDetails } from "../interface/MovieDetails";
 import { getGenreNames } from "../utils/helper";
 import { Description } from "@radix-ui/react-dialog";
+import { fetchMovieVideo } from "../service/api-service";
+import { MovieTrailerPlayer } from "./MovieTrailerPlayer";
 
 interface DialogProps {
   open: boolean;
@@ -18,6 +20,8 @@ interface DialogProps {
 
 export const MovieDescriptionDialog: FC<DialogProps> = ({ open, onClose, movie }) => {
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
+  const [trailerURL, setTrailerURL] = useState<string | undefined>('');
+  const [openVideo, setOpenVideo] = useState(false);
 
   useEffect(() => {
     if (movie) {
@@ -25,11 +29,21 @@ export const MovieDescriptionDialog: FC<DialogProps> = ({ open, onClose, movie }
     }
   }, [movie]);
 
+  const handleTrailerButton = async () => {
+    await fetchMovieVideo(movie?.id)
+      .then(res => {
+        setTrailerURL(res)
+        setOpenVideo(true);
+      })
+      .catch(err => console.log(err))
+  }
+
   const backgroundImage = movieDetails
   ? `url(https://image.tmdb.org/t/p/original${movieDetails.backdrop_path})`
   : null;
 
   const genreNames = movieDetails ? getGenreNames(movieDetails?.genre_ids) : [];
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent
@@ -66,11 +80,16 @@ export const MovieDescriptionDialog: FC<DialogProps> = ({ open, onClose, movie }
               <span className="text-slate-300 font-bold text-md">SUMMARY</span>
               <span className="text-white text-[0.80rem]">{movieDetails?.overview}</span>
             </Description>
-            <div className="flex justify-end gap-x-3">
-              <button className="w-[150px] text-[0.90rem] text-white bg-slate-800 py-2 px-4 rounded-full flex items-center justify-between hover:bg-slate-900 active:bg-slate-950 transition-all">
+            <div className="flex justify-end gap-x-3 ">
+              <button className="w-[150px] text-[0.90rem] text-white bg-slate-800 py-2 px-4 rounded-full flex items-center justify-between hover:bg-slate-900 active:bg-slate-950 transition-all"
+               onClick={handleTrailerButton}
+               >
                 <Clapperboard size={20} />
                 <span>Watch Trailer</span>
               </button>
+              {openVideo && trailerURL && (
+                <MovieTrailerPlayer trailerUrl={trailerURL}/>
+               )}
               <button className="w-[150px] text-[0.90rem] text-white bg-slate-800 py-2 px-4 rounded-full flex items-center justify-between hover:bg-slate-900 active:bg-slate-950 transition-all">
                 <CirclePlay size={22} />
                 <span>Watch Movie</span>
